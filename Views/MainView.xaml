@@ -1,0 +1,157 @@
+﻿<Window x:Name="frmMain" x:Class="pokedex.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vw="clr-namespace:pokedex.Views"
+        mc:Ignorable="d"
+        Title="MainForm" 
+        Height="700"
+        Width="1100"
+        WindowStyle="None" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="0" 
+              Grid.ColumnSpan="2" 
+              Background="#4F4F4F"
+              MouseDown="Grid_MouseDown">
+
+        </Grid>
+
+        <Grid Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Foreground="White"
+                    Grid.Column="14"
+                    Name="btnMinimazed"
+                    Click="btnMinimazed_Click">
+                <Image Source="C:\Users\Gbrex\source\repos\pokedex\Assets\minimize-window-32.png"
+                       Height="22"
+                       Width="22"/>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#4F4F4F"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#7F7F7F"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="0"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center">
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Button Foreground="White"
+                    Grid.Column="15"
+                    Click="btnMaximizade_Click"
+                    Name="btnMaximizade">
+                <Image Source="C:\Users\Gbrex\source\repos\pokedex\Assets\maximize-window-32.png"
+                       Height="22"
+                       Width="22"/>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#4F4F4F"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#7F7F7F"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="0"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center">
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Button Foreground="White"
+                    Grid.Column="16" 
+                    Name="btnClose" Click="btnClose_Click"
+                    >
+                <Image Source="C:\Users\Gbrex\source\repos\pokedex\Assets\close-window-32.png"
+                       Height="22"
+                       Width="22"/>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#4F4F4F"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#7F7F7F"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="0"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center">
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="0" Background="#EB5757">
+            <Image Source="C:\Users\Gbrex\source\repos\pokedex\Assets\logo-pokemon.png"
+                   Width="80"
+                   Height="80"
+                   Margin="5,10,5,480"/>
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="2">
+            <vw:PokemonsPageUserControlView>
+                
+            </vw:PokemonsPageUserControlView>
+        </Grid>
+
+    </Grid>
+
+</Window>
