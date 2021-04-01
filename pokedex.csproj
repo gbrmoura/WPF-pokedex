@@ -188,22 +188,16 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\logo-pokemon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\minimize-window-32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\maximize-window-32.png" />
+    <Resource Include="Daco_4582111.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\close-window-32.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\search-48.png" />
+    <Resource Include="Assets\maximize-window-32.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Daco_4582111.ico" />
+    <Resource Include="Assets\minimize-window-32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />

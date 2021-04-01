@@ -58,7 +58,7 @@
                     Grid.Column="14"
                     Name="btnMinimazed"
                     Click="btnMinimazed_Click">
-                <Image Source="C:\Users\Gbrex\source\repos\pokedex\Assets\minimize-window-32.png"
+                <Image Source="/Assets\minimize-window-32.png"
                        Height="22"
                        Width="22"/>
                 <Button.Style>
@@ -88,7 +88,7 @@
                     Grid.Column="15"
                     Click="btnMaximizade_Click"
                     Name="btnMaximizade">
-                <Image Source="C:\Users\Gbrex\source\repos\pokedex\Assets\maximize-window-32.png"
+                <Image Source="/Assets\maximize-window-32.png"
                        Height="22"
                        Width="22"/>
                 <Button.Style>
@@ -118,7 +118,7 @@
                     Grid.Column="16" 
                     Name="btnClose" Click="btnClose_Click"
                     >
-                <Image Source="C:\Users\Gbrex\source\repos\pokedex\Assets\close-window-32.png"
+                <Image Source="/Assets\close-window-32.png"
                        Height="22"
                        Width="22"/>
                 <Button.Style>
