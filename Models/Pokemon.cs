@@ -45,6 +45,7 @@ namespace pokedex.Models
         public Types[] types { get; set; }
         [JsonProperty("weigth")]
         public int weigth { get; set; }
+
     }
 
     public class Abilities

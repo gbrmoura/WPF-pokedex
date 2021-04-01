@@ -3,15 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vw="clr-namespace:pokedex.Views"
+        xmlns:vw="clr-namespace:pokedex.Views" 
+        xmlns:viewmodels="clr-namespace:pokedex.ViewModels" 
+        xmlns:converter="clr-namespace:pokedex.Converter"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
         Title="MainForm" 
-        Height="700"
-        Width="1100"
-        WindowStyle="None" WindowStartupLocation="CenterScreen">
+        Height="700" Width="1100"
+        ResizeMode="NoResize"
+        WindowStyle="None" 
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <converter:StringCapitalize x:Key="StringConverter"/>
+        <converter:PokemonColor x:Key="PokemonColor"/>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="90"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -26,7 +33,7 @@
 
         </Grid>
 
-        <Grid Grid.Column="2">
+        <Grid Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -139,18 +146,138 @@
 
         </Grid>
 
-        <Grid Grid.Row="2" Grid.Column="0" Background="#EB5757">
-            <Image Source="C:\Users\Gbrex\source\repos\pokedex\Assets\logo-pokemon.png"
-                   Width="80"
-                   Height="80"
-                   Margin="5,10,5,480"/>
-        </Grid>
 
-        <Grid Grid.Row="2" Grid.Column="2">
-            <vw:PokemonsPageUserControlView>
-                
-            </vw:PokemonsPageUserControlView>
-        </Grid>
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Margin="5">
+                <ItemsControl x:Name="ListViewPokemon" ItemsSource="{Binding Path=PokemonList}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Grid.Row="1"
+                                    Height="300"
+                                    Width="200"
+                                    BorderThickness="1"
+                                    BorderBrush="#E0E0E0"
+                                    CornerRadius="5"
+                                    Margin="5">
+                                <Border.BitmapEffect>
+                                    <DropShadowBitmapEffect Color="Black"
+                                                            ShadowDepth="0"
+                                                            Softness="0.165" Direction="0" Opacity="0.145"/>
+                                </Border.BitmapEffect>
+
+                                <Grid Background="White">
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="176"/>
+                                        <RowDefinition Height="60"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <!-- Image Content -->
+                                    <Grid Grid.Row="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="115"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Border Grid.Row="0"
+                                                CornerRadius="5,5,0,0"
+                                                Background="{Binding Path=types[0].type.name, Converter={StaticResource PokemonColor}}"/>
+                                    </Grid>
+                                    <Border Grid.Row="0"
+                                            Height="155"
+                                            Width="155"
+                                            CornerRadius="200"
+                                            Margin="19,17,19,0"
+                                            Background="White"/>
+
+                                    <StackPanel Grid.Row="0"
+                                                Height="160"
+                                                Width="160"
+                                                Margin="19,17,19,0">
+                                        <Image Source="{Binding Path=sprites.front_default}"
+                                                Width="160"
+                                                Height="160"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"/>
+                                    </StackPanel>
+
+
+                                    <!-- Name content -->
+                                    <Grid Grid.Row="1">
+                                        <TextBlock  VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center"
+                                                    FontSize="24"
+                                                    Text="{Binding Path=name, Converter={StaticResource StringConverter}}"
+                                                    Foreground="#4F4F4F"/>
+                                        <StackPanel Background="#E0E0E0" 
+                                                    Width="170" Height="1"
+                                                    VerticalAlignment="Bottom"/>
+                                    </Grid>
+
+                                    <!-- Types content -->
+                                    <Grid Grid.Row="2">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="30"/>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+
+
+                                            <TextBlock FontSize="14"
+                                                        Text="{Binding Path=types[0].type.name, Converter={StaticResource StringConverter}}"
+                                                        Foreground="#4F4F4F"
+                                                        Grid.Row="1"
+                                                        Grid.Column="0"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"/>
+
+                                            <TextBlock FontSize="10"
+                                                        Text="type"
+                                                        Foreground="#7F7F7F"
+                                                        Grid.Row="2"
+                                                        Grid.Column="0"
+                                                        HorizontalAlignment="Center"
+                                                       VerticalAlignment="Top"/>
+
+                                            <TextBlock FontSize="14"
+                                                        Text="{Binding Path=types[1].type.name,  Converter={StaticResource StringConverter}}"
+                                                        Foreground="#4F4F4F"
+                                                        Grid.Row="1"
+                                                        Grid.Column="1"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"/>
+
+                                            <TextBlock FontSize="10"
+                                                        Text="type"
+                                                        Foreground="#7F7F7F"
+                                                        Grid.Row="2"
+                                                        Grid.Column="1"
+                                                        HorizontalAlignment="Center"
+                                                       VerticalAlignment="Top"/>
+
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"
+                                       Margin="0"
+                                       AllowDrop="True"
+                                       HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer> 
 
     </Grid>
 

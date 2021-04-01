@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using pokedex.ViewModels;
 
 namespace pokedex.Views
 {
@@ -19,9 +20,13 @@ namespace pokedex.Views
     /// </summary>
     public partial class MainView : Window
     {
+        MainViewModel ViewModel;
+
         public MainView()
         {
             InitializeComponent();
+            ViewModel = new MainViewModel();
+            this.DataContext = ViewModel;
         }
 
         private void Grid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

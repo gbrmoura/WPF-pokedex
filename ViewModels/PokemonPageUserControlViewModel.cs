@@ -29,12 +29,17 @@ namespace pokedex.ViewModels
 
         private void loadData()
         {
-            for (var i = 1; i < 4; i++)
+            for (var i = 1; i < 10; i++)
             {
                 var response = HttpRequest.HttpGetRequest("https://pokeapi.co/api/v2/pokemon/"+i);
                 var pokemon = JsonConvert.DeserializeObject<Pokemon>(response);
                 PokemonList.Add(pokemon);
             }
+        }
+
+        private String Color(String type)
+        {
+            return PokemonUtils.TypeColor(type);
         }
 
         private Pokemon _pokemon;
@@ -52,9 +57,6 @@ namespace pokedex.ViewModels
             get { return _pokemonList; }
             set { _pokemonList = value; }
         }
-
-
-
 
 
     }
