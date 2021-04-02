@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using pokedex.ViewModels;
+using pokedex.Views;
 
 namespace pokedex.Views
 {
@@ -27,23 +28,20 @@ namespace pokedex.Views
             InitializeComponent();
             ViewModel = new MainViewModel();
             this.DataContext = ViewModel;
+            //this.MainFrame.Content = new PokemonsView();
         }
 
-        private void Grid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
+        private void Grid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+            if (e.LeftButton == MouseButtonState.Pressed) {
                 DragMove();
             }
         }
 
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
+        private void btnClose_Click(object sender, RoutedEventArgs e) {
             Close();
         }
 
-        private void btnMaximizade_Click(object sender, RoutedEventArgs e)
-        {
+        private void btnMaximizade_Click(object sender, RoutedEventArgs e) {
             if (this.WindowState == WindowState.Maximized) {
                 this.WindowState = WindowState.Normal;
             } else {
@@ -51,9 +49,12 @@ namespace pokedex.Views
             } 
         }
 
-        private void btnMinimazed_Click(object sender, RoutedEventArgs e)
-        {
+        private void btnMinimazed_Click(object sender, RoutedEventArgs e) {
             this.WindowState = WindowState.Minimized;
+        }
+
+        private void forms() {
+            
         }
     }
 }
