@@ -12,36 +12,51 @@ namespace pokedex.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-       
-        public event PropertyChangedEventHandler PropertyChanged;
-        private List<Pokemon> _pokemonList;
 
-        private void OnPropertyChanged(string propertyname)
-        {
+        private PokemonOffsetLimit page_resource;
+        private List<Pokemon> pokemon_list;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyname) {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
         }
 
-        public MainViewModel()
-        {
-            _pokemonList = new List<Pokemon>();
-            loadData(150);
-        }
+        public MainViewModel() {
+            try {
+                page_resource = new PokemonOffsetLimit {
+                    count = 0,
+                    next = "",
+                    previous = ""
+                };
 
-        private void loadData(int qtqPokemons)
-        {
-            for (var i = 1; i < qtqPokemons+1; i++)
-            {
-                var response = HttpRequest.HttpGetRequest("https://pokeapi.co/api/v2/pokemon/" + i);
-                var pokemon = JsonConvert.DeserializeObject<Pokemon>(response);
-                PokemonList.Add(pokemon);
+                PokemonList = new List<Pokemon>();
+                
+                var response_page_resource = HttpRequest.HttpGetRequest("https://pokeapi.co/api/v2/pokemon?limit30&offset=0");
+                page_resource = JsonConvert.DeserializeObject<PokemonOffsetLimit>(response_page_resource);
+
+
+                foreach(BaseNameUrl result in page_resource.results) {
+
+                    try {
+                        var response = HttpRequest.HttpGetRequest(result.url);
+                        var pokemon = JsonConvert.DeserializeObject<Pokemon>(response);
+                        PokemonList.Add(pokemon);
+                    } catch (Exception e) {
+                        Console.WriteLine("error " + e.Message);
+                    }
+                }
+
+            } catch (Exception e) {
+                Console.WriteLine("error " + e.Message);
             }
         }
 
-        public List<Pokemon> PokemonList
-        {
-            get { return _pokemonList; }
-            set { _pokemonList = value; }
+        
+        public List<Pokemon> PokemonList {
+            get { return pokemon_list; }
+            set { pokemon_list = value;  OnPropertyChanged("PokemonList"); }
         }
     }
 }

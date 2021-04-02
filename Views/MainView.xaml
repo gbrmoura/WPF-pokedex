@@ -277,8 +277,8 @@
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
             </StackPanel>
-        </ScrollViewer> 
-
+        </ScrollViewer>
+       
     </Grid>
 
 </Window>

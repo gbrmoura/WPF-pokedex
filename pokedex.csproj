@@ -139,6 +139,7 @@
     <Compile Include="Converter\PokemonColor.cs" />
     <Compile Include="Converter\StringCapitalize.cs" />
     <Compile Include="Models\Pokemon.cs" />
+    <Compile Include="Models\PokemonOffsetLimit.cs" />
     <Compile Include="Models\PokemonSpecies.cs" />
     <Compile Include="Utils\HttpRequest.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
