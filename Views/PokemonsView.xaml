@@ -86,30 +86,35 @@
                                         <ItemsControl x:Name="PokemonTypesView" ItemsSource="{Binding Path=Types}">
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
-                                                    <Grid Margin="15, 0">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition/>
-                                                        </Grid.ColumnDefinitions>
-                                                        <Grid.RowDefinitions>
-                                                            <RowDefinition Height="*"/>
-                                                            <RowDefinition Height="30"/>
-                                                            <RowDefinition Height="20"/>
-                                                            <RowDefinition Height="*"/>
-                                                        </Grid.RowDefinitions>
+                                                    <Border BorderThickness="1"
+                                                            BorderBrush="#E0E0E0"
+                                                            Margin="5, 5" CornerRadius="2"
+                                                            Height="45" Width="75">
+                                                        <Grid>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="25"/>
+                                                                <RowDefinition Height="20"/>
+                                                            </Grid.RowDefinitions>
 
+                                                            <TextBlock Grid.Row="0" 
+                                                                       FontSize="16" Foreground="#4F4F4F"
+                                                                       Text="{Binding Path=Type.Name, Converter={StaticResource StringConverter}}" 
+                                                                       HorizontalAlignment="Center"
+                                                                       VerticalAlignment="Center"/>
 
-                                                        <TextBlock Grid.Row="1" Grid.Column="0"
-                                                                   FontSize="14" Foreground="#4F4F4F"
-                                                                   Text="{Binding Path=Type.Name, Converter={StaticResource StringConverter}}" 
-                                                                   HorizontalAlignment="Center"
-                                                                   VerticalAlignment="Center"/>
+                                                            <StackPanel Background="#E0E0E0" Grid.Row="1" Height="1"
+                                                                        VerticalAlignment="Top"/>
+                                                            
+                                                            <Border Grid.Row="1"
+                                                                    CornerRadius="0, 0, 2, 2"
+                                                                    Background="{Binding Path=Type.Name, Converter={StaticResource PokemonColor}}"/>
 
-                                                        <TextBlock Grid.Row="2" Grid.Column="0"
-                                                                   FontSize="10" Foreground="#7F7F7F"                                                                    
-                                                                   HorizontalAlignment="Center"
-                                                                   VerticalAlignment="Top" Text="type"/>
-
-                                                    </Grid>
+                                                            <TextBlock Grid.Row="1" Text="type"
+                                                                       FontSize="12" Foreground="#FFFF"                                                                    
+                                                                       HorizontalAlignment="Center"/>
+                                                            
+                                                        </Grid>
+                                                    </Border>
                                                 </DataTemplate>
                                             </ItemsControl.ItemTemplate>
                                             <ItemsControl.ItemsPanel>

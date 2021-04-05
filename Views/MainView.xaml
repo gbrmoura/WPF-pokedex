@@ -143,11 +143,12 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-
         </Grid>
-        <vw:PokemonsView Grid.Row="1"
-                         Width="auto" 
-                         Height="auto"/>
+
+        <Frame x:Name="MainFrame" Grid.Row="1" 
+               Content="{Binding Path=FrameContent}">
+
+        </Frame>
 
     </Grid>
 

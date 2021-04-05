@@ -16,7 +16,7 @@ namespace pokedex.ViewModels {
         }
 
         public MainViewModel() {
-
+            FrameContent = new PokemonsView();
         }
 
         public UserControl FrameContent {
