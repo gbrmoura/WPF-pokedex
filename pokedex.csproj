@@ -136,12 +136,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Class\BaseContent.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Converter\PokemonColor.cs" />
     <Compile Include="Converter\StringCapitalize.cs" />
     <Compile Include="Models\Pokemon.cs" />
+    <Compile Include="Models\PokemonCard.cs" />
     <Compile Include="Models\PokemonOffsetLimit.cs" />
-    <Compile Include="Models\PokemonSpecies.cs" />
     <Compile Include="Utils\HttpRequest.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PokemonsViewModel.cs" />
@@ -152,17 +153,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\PokemonDescriptionView.xaml.cs">
-      <DependentUpon>PokemonDescriptionView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\PokemonsView.xaml.cs">
       <DependentUpon>PokemonsView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\MainView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\PokemonDescriptionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

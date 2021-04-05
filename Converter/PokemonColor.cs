@@ -6,14 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace pokedex.Converter
-{
-    public class PokemonColor : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            switch (value.ToString())
-            {
+namespace pokedex.Converter {
+    public class PokemonColor : IValueConverter {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+            switch (value.ToString()) {
                 case "normal":
                     return "#a8a878";
                 case "fighting":
@@ -54,8 +50,7 @@ namespace pokedex.Converter
             return "#EB5757";
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
             return "#EB5757";
         }
     }

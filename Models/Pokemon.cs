@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
+using pokedex.Class;
 
-namespace pokedex.Models
-{
-    public class Pokemon
-    {
+namespace pokedex.Models {
+    public class Pokemon {
         [JsonProperty("abilities")]
         public Abilities[] abilities { get; set; }
         [JsonProperty("base_experience")]
         public int base_experience { get; set; }
         [JsonProperty("forms")]
-        public BaseNameUrl[] forms { get; set; }
+        public BaseContent[] forms { get; set; }
         [JsonProperty("game_indices")]
         public GameIndices[] game_indices { get; set; }
         [JsonProperty("heigth")]
@@ -36,7 +31,7 @@ namespace pokedex.Models
         [JsonProperty("past_types")]
         public PastTypes[] past_types { get; set; }
         [JsonProperty("species")]
-        public BaseNameUrl species { get; set; }
+        public BaseContent species { get; set; }
         [JsonProperty("sprites")]
         public Sprites sprites { get; set; }
         [JsonProperty("stats")]
@@ -48,10 +43,9 @@ namespace pokedex.Models
 
     }
 
-    public class Abilities
-    {
+    public class Abilities {
         [JsonProperty("ability")]
-        public BaseNameUrl ability { get; set; }
+        public BaseContent ability { get; set; }
         [JsonProperty("is_hidden")]
         public bool is_hidden { get; set; }
         [JsonProperty("slot")]
@@ -59,67 +53,59 @@ namespace pokedex.Models
 
     }
 
-    public class GameIndices 
-    {
+    public class GameIndices {
         [JsonProperty("game_index")]
         public int game_indixe { get; set; }
         [JsonProperty("version")]
-        public BaseNameUrl version { get; set; }
+        public BaseContent version { get; set; }
     }
 
 
-    public class HeldItems 
-    {
+    public class HeldItems {
         [JsonProperty("item")]
-        public BaseNameUrl item { get; set; }
+        public BaseContent item { get; set; }
         [JsonProperty("version_details")]
         public VersionDetails[] version_details { get; set; }
     }
 
-    public class VersionDetails 
-    {
+    public class VersionDetails {
         [JsonProperty("rarity")]
         public int rarity { get; set; }
         [JsonProperty("version")]
-        public BaseNameUrl version { get; set; }
+        public BaseContent version { get; set; }
     }
 
-    public class Moves 
-    {
+    public class Moves {
         [JsonProperty("move")]
-        public BaseNameUrl move { get; set; }
+        public BaseContent move { get; set; }
         [JsonProperty("version_group_details")]
         public VersionGroupDetails[] version_group_details { get; set; }
     }
 
-    public class VersionGroupDetails
-    {
+    public class VersionGroupDetails {
         [JsonProperty("level_learned_at")]
         public int level_learned_at { get; set; }
         [JsonProperty("move_learn_method")]
-        public BaseNameUrl move_learn_method { get; set; }
+        public BaseContent move_learn_method { get; set; }
         [JsonProperty("version_group")]
-        public BaseNameUrl version_group { get; set; }
+        public BaseContent version_group { get; set; }
     }
 
-    public class PastTypes
-    {
+    public class PastTypes {
         [JsonProperty("generation")]
-        public BaseNameUrl generation { get; set; }
+        public BaseContent generation { get; set; }
         [JsonProperty("types")]
         public Types[] types { get; set; }
 
     }
 
-    public class Types
-    {
+    public class Types {
         [JsonProperty("slot")]
         public int slot { get; set; }
         [JsonProperty("type")]
-        public BaseNameUrl type { get; set; }
+        public BaseContent type { get; set; }
     }
-    public class Sprites
-    {
+    public class Sprites {
         [JsonProperty("back_default")]
         public String back_default { get; set; }
         [JsonProperty("back_female")]
@@ -138,21 +124,13 @@ namespace pokedex.Models
         public String front_shiny_female { get; set; }
     }
 
-    public class Stats
-    {
+    public class Stats {
         [JsonProperty("base_stat")]
         public int base_stat { get; set; }
         [JsonProperty("effort")]
         public int effort { get; set; }
         [JsonProperty("stat")]
-        public BaseNameUrl stat { get; set; }
+        public BaseContent stat { get; set; }
     }
 
-    public class BaseNameUrl
-    {
-        [JsonProperty("name")]
-        public String name { get; set; }
-        [JsonProperty("url")]
-        public String url { get; set; }
-    }
 }

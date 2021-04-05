@@ -14,21 +14,17 @@ using System.Windows.Shapes;
 using pokedex.ViewModels;
 using pokedex.Views;
 
-namespace pokedex.Views
-{
+namespace pokedex.Views {
     /// <summary>
     /// Lógica interna para MainView.xaml
     /// </summary>
-    public partial class MainView : Window
-    {
+    public partial class MainView : Window {
         MainViewModel ViewModel;
 
-        public MainView()
-        {
+        public MainView() {
             InitializeComponent();
             ViewModel = new MainViewModel();
             this.DataContext = ViewModel;
-            //this.MainFrame.Content = new PokemonsView();
         }
 
         private void Grid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
@@ -46,15 +42,11 @@ namespace pokedex.Views
                 this.WindowState = WindowState.Normal;
             } else {
                 this.WindowState = WindowState.Maximized;
-            } 
+            }
         }
 
         private void btnMinimazed_Click(object sender, RoutedEventArgs e) {
             this.WindowState = WindowState.Minimized;
-        }
-
-        private void forms() {
-            
         }
     }
 }

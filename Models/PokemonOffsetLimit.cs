@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
+using pokedex.Class; 
 
-namespace pokedex.Models
-{
-    public class PokemonOffsetLimit
-    {
+namespace pokedex.Models {
+    public class PokemonOffsetLimit {
         [JsonProperty("count")]
         public int count { get; set; }
         [JsonProperty("next")]
@@ -16,6 +11,6 @@ namespace pokedex.Models
         [JsonProperty("previous")]
         public String previous { get; set; }
         [JsonProperty("results")]
-        public BaseNameUrl[] results { get; set; }
+        public BaseContent[] results { get; set; }
     }
 }

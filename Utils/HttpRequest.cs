@@ -9,43 +9,32 @@ using System.Linq;
 
 namespace pokedex.Utils
 {
-    class HttpRequest
-    {
+    class HttpRequest {
         public static CookieContainer cookies;
-
-        public void SetCookie(string url, string cookiename, string cookievalue)
-        {
+        static HttpRequest() {
+            cookies = new CookieContainer();
+            ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(delegate { return true; });
+        }
+        public void SetCookie(string url, string cookiename, string cookievalue) {
             Uri target = new Uri(url);
             cookies.Add(new Cookie(cookiename, cookievalue) { Domain = target.Host });
         }
 
-        static HttpRequest()
-        {
-            cookies = new CookieContainer();
-            ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(delegate { return true; });
-        }
-
-        public static string HttpPostRequest(string url, Dictionary<string, string> postParameters)
-        {
+        public static string HttpPostRequest(string url, Dictionary<string, string> postParameters) {
             string postData = "";
 
-            foreach (string key in postParameters.Keys)
-            {
-                if (key == "tags")
-                {
+            foreach (string key in postParameters.Keys) {
+                if (key == "tags") {
                     string tags = postParameters[key];
                     string[] words = tags.Split(';');
 
-                    foreach (var word in words)
-                    {
+                    foreach (var word in words) {
                         postData += "tags="
                         + Uri.EscapeDataString(word) + "&";
-                    }
-
+                    } 
+                } else {
+                    postData += key + "=" + Uri.EscapeDataString(postParameters[key]) + "&";
                 }
-                else
-                    postData += key + "="
-                        + Uri.EscapeDataString(postParameters[key]) + "&";
             }
 
             HttpWebRequest myHttpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
@@ -80,8 +69,7 @@ namespace pokedex.Utils
             return pageContent;
         }
 
-        public static string HttpGetRequest(string url)
-        {
+        public static string HttpGetRequest(string url) {
             HttpWebRequest myHttpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
             myHttpWebRequest.Method = "GET";
             myHttpWebRequest.CookieContainer = cookies;
@@ -89,14 +77,12 @@ namespace pokedex.Utils
             myHttpWebRequest.AllowAutoRedirect = true;
 
             var response = (HttpWebResponse)myHttpWebRequest.GetResponse();
-            using (var streamReader = new StreamReader(response.GetResponseStream()))
-            {
+            using (var streamReader = new StreamReader(response.GetResponseStream())) {
                 return streamReader.ReadToEnd();
             }
         }
 
-        public static bool HttpGetDownload(string url, string arquivo)
-        {
+        public static bool HttpGetDownload(string url, string arquivo) {
             HttpWebRequest myHttpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
             myHttpWebRequest.Method = "GET";
             myHttpWebRequest.CookieContainer = cookies;
@@ -104,17 +90,14 @@ namespace pokedex.Utils
             myHttpWebRequest.AllowAutoRedirect = true;
 
             var response = (HttpWebResponse)myHttpWebRequest.GetResponse();
-            using (Stream stream = response.GetResponseStream())
-            {
-                using (FileStream fs = File.Create(arquivo))
-                {
+            using (Stream stream = response.GetResponseStream()) {
+                using (FileStream fs = File.Create(arquivo)) {
                     stream.CopyTo(fs);
                 }
             }
             return true;
         }
-        public static void HttpUploadFile(string url, string file, string paramName, string contentType, NameValueCollection nvc)
-        {
+        public static void HttpUploadFile(string url, string file, string paramName, string contentType, NameValueCollection nvc) {
             string boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
             byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
 
@@ -127,8 +110,7 @@ namespace pokedex.Utils
             Stream rs = wr.GetRequestStream();
 
             string formdataTemplate = "Content-Disposition: form-data; name=\"{0}\"\r\n\r\n{1}";
-            foreach (string key in nvc.Keys)
-            {
+            foreach (string key in nvc.Keys) {
                 rs.Write(boundarybytes, 0, boundarybytes.Length);
                 string formitem = string.Format(formdataTemplate, key, nvc[key]);
                 byte[] formitembytes = System.Text.Encoding.UTF8.GetBytes(formitem);
@@ -144,8 +126,7 @@ namespace pokedex.Utils
             FileStream fileStream = new FileStream(file, FileMode.Open, FileAccess.Read);
             byte[] buffer = new byte[4096];
             int bytesRead = 0;
-            while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
-            {
+            while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0) {
                 rs.Write(buffer, 0, bytesRead);
             }
             fileStream.Close();
@@ -155,31 +136,23 @@ namespace pokedex.Utils
             rs.Close();
 
             WebResponse wresp = null;
-            try
-            {
+            try {
                 wresp = wr.GetResponse();
                 Stream stream2 = wresp.GetResponseStream();
                 StreamReader reader2 = new StreamReader(stream2);
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
 
-                if (wresp != null)
-                {
+                if (wresp != null) {
                     wresp.Close();
                     wresp = null;
                 }
-            }
-            finally
-            {
+            } finally {
                 wr = null;
             }
         }
 
-        public static void LimpaCookies(string url)
-        {
-            if (cookies != null)
-            {
+        public static void LimpaCookies(string url) {
+            if (cookies != null) {
                 cookies.GetCookies(new Uri(url))
                            .Cast<Cookie>()
                            .ToList()

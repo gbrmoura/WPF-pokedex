@@ -145,13 +145,9 @@
             </Button>
 
         </Grid>
-
-        <Frame x:Name="MainFrame" Grid.Row="1" 
-               NavigationUIVisibility="Hidden"
-               Content="{Binding Path=Content}">
-            
-        </Frame>
-        
+        <vw:PokemonsView Grid.Row="1"
+                         Width="auto" 
+                         Height="auto"/>
 
     </Grid>
 
