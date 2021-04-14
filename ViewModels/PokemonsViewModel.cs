@@ -5,18 +5,21 @@ using Newtonsoft.Json;
 using pokedex.Models;
 using pokedex.Commands;
 using pokedex.Class;
+using pokedex.ViewModels;
+using pokedex.Views;
 using System.Collections.ObjectModel;
 
 namespace pokedex.ViewModels
 {
-    class PokemonsViewModel : INotifyPropertyChanged {
+    public class PokemonsViewModel : INotifyPropertyChanged {
 
-        private const String _firstRequest = "https://pokeapi.co/api/v2/pokemon?limit30&offset=0";
+        private const String _firstRequest = "https://pokeapi.co/api/v2/pokemon?limit3&offset=0";
 
         private PokemonOffsetLimit _pageResource;
         private ObservableCollection<PokemonCard> _pokemonList;
         private RelayCommand _nextCommand;
         private RelayCommand _previousCommand;
+        private SelectPokemonCommand _selectCommand;
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyname) {
@@ -31,8 +34,10 @@ namespace pokedex.ViewModels
                 _pokemonList = new ObservableCollection<PokemonCard>();
                 _nextCommand = new RelayCommand(Next);
                 _previousCommand = new RelayCommand(Previous);
+                _selectCommand = new SelectPokemonCommand(Select);
 
                 ExecuteRequest(_firstRequest);
+
             } catch (Exception e) {
                 Console.WriteLine("error " + e.Message);
             }
@@ -42,7 +47,6 @@ namespace pokedex.ViewModels
             get { return _pageResource; }
             set { _pageResource = value; OnPropertyChanged("PageResource"); }
         }
-
 
         public ObservableCollection<PokemonCard> PokemonList {
             get { return _pokemonList; }
@@ -57,19 +61,24 @@ namespace pokedex.ViewModels
             get { return _previousCommand; }
         }
 
+        public SelectPokemonCommand SelectCommand {
+            get { return _selectCommand; }
+        }
+
         public void ExecuteRequest(String url) {
 
             try {
-                var response_page_resource = HttpRequest.HttpGetRequest(url);
-                this._pageResource = JsonConvert.DeserializeObject<PokemonOffsetLimit>(response_page_resource);
-                this.PokemonList.Clear();
+                if (String.IsNullOrEmpty(url)) {
+                    throw new Exception();
+                } 
+
+                this._pageResource = JsonConvert.DeserializeObject<PokemonOffsetLimit>(HttpRequest.HttpGetRequest(url));
+                this._pokemonList.Clear();
 
                 foreach ( BaseContent content in _pageResource.results) {
 
                     try {
-                        var response = HttpRequest.HttpGetRequest(content.Url);
-                        var pokemon = JsonConvert.DeserializeObject<PokemonCard>(response);
-                        this.PokemonList.Add(pokemon);
+                        this._pokemonList.Add(JsonConvert.DeserializeObject<PokemonCard>(HttpRequest.HttpGetRequest(content.Url)));
                     } catch (Exception e) {
                         Console.WriteLine("error while tryng to insert pokemon - " + e.Message);
                     }
@@ -79,12 +88,12 @@ namespace pokedex.ViewModels
             }
         }
 
-        public void Next() {
-            ExecuteRequest(PageResource.next);
-        }
+        public void Next() => ExecuteRequest(PageResource.next);
 
-        public void Previous() {
-            ExecuteRequest(PageResource.previous);
+        public void Previous() => ExecuteRequest(PageResource.previous);
+
+        public void Select(int ID) {
+            MainViewModel.GetInstance().FrameContent = new PokemonDescripitonView(ID);
         }
 
 

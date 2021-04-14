@@ -8,11 +8,9 @@ namespace pokedex.Views {
     /// Interação lógica para PokemonsView.xam
     /// </summary>
     public partial class PokemonsView : UserControl {
-        private PokemonsViewModel ViewModel; 
         public PokemonsView() {
             InitializeComponent();
-            ViewModel = new PokemonsViewModel();
-            this.DataContext = ViewModel;
+            this.DataContext = new PokemonsViewModel(); ;
         }
     }
 }

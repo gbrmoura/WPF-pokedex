@@ -116,8 +116,7 @@
 
             <Button Foreground="White"
                     Grid.Column="16" 
-                    Name="btnClose" Click="btnClose_Click"
-                    >
+                    Name="btnClose" Click="btnClose_Click">
                 <Image Source="/Assets\close-window-32.png"
                        Height="22"
                        Width="22"/>
@@ -145,10 +144,10 @@
             </Button>
         </Grid>
 
-        <Frame x:Name="MainFrame" Grid.Row="1" 
-               Content="{Binding Path=FrameContent}">
-
-        </Frame>
+        <ContentControl Content="{Binding Path=FrameContent}" Grid.Row="1">
+            
+        </ContentControl>     
+      
 
     </Grid>
 

@@ -4,11 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:pokedex.Views"
+             xmlns:vw="clr-namespace:pokedex.ViewModels"
              xmlns:converter="clr-namespace:pokedex.Converter"
-             mc:Ignorable="d"  Height="670" Width="1100">
+             Height="auto" Width="auto">
+            <!-- Heigth="670" Width="1100"-->
     <UserControl.Resources>
         <converter:StringCapitalize x:Key="StringConverter"/>
-        <converter:PokemonColor x:Key="PokemonColor"/>    
+        <converter:PokemonColor x:Key="PokemonColor"/>
+        <vw:PokemonsViewModel x:Key="PokemonsViewModel"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -22,25 +25,40 @@
                 <ItemsControl x:Name="PokemonListView" ItemsSource="{Binding Path=PokemonList}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Grid.Row="1"
-                                    Height="300" Width="200"
-                                    BorderThickness="1"
-                                    BorderBrush="#E0E0E0"
-                                    CornerRadius="5" Margin="5">
-                                <Border.BitmapEffect>
-                                    <DropShadowBitmapEffect Color="Black"
-                                                            ShadowDepth="0"
-                                                            Softness="0.165" Direction="0" Opacity="0.145"/>
-                                </Border.BitmapEffect>
+                            <Button Height="300" Width="200" Margin="5"
+                                    Command="{Binding Source={StaticResource PokemonsViewModel}, Path=SelectCommand}"
+                                    CommandParameter="{Binding Path=ID}">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="#FFFF"/>
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#FFFF"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
 
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border CornerRadius="5"
+                                                BorderThickness="1"
+                                                BorderBrush="#E0E0E0"
+                                                Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Stretch"
+                                                              HorizontalAlignment="Stretch"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                                
                                 <Grid Background="White">
-
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="170"/>
                                         <RowDefinition Height="50"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    
+
                                     <Grid Grid.Row="0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="115"/>
@@ -61,7 +79,7 @@
                                                 Height="160"
                                                 Width="160"
                                                 Margin="19,17,19,0">
-                                        <Image Source="{Binding Path=Sprites.FrontDefault}"
+                                        <Image Source="{Binding Path=Sprites.Front_Default}"
                                                 Width="160"
                                                 Height="160"
                                                 VerticalAlignment="Center"
@@ -103,7 +121,7 @@
                                                             <StackPanel Background="#E0E0E0" 
                                                                         Grid.Row="1" Height="1"
                                                                         VerticalAlignment="Top"/>
-                                                            
+
                                                             <Border Grid.Row="1"
                                                                     CornerRadius="0, 0, 2, 2"
                                                                     Background="{Binding Path=Type.Name, Converter={StaticResource PokemonColor}}"/>
@@ -111,7 +129,7 @@
                                                             <TextBlock Grid.Row="1" Text="type"
                                                                        FontSize="12" Foreground="#FFFF"                                                                    
                                                                        HorizontalAlignment="Center"/>
-                                                            
+
                                                         </Grid>
                                                     </Border>
                                                 </DataTemplate>
@@ -126,7 +144,8 @@
 
                                     </Grid>
                                 </Grid>
-                            </Border>
+
+                            </Button>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                     <ItemsControl.ItemsPanel>
@@ -165,10 +184,8 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Button Foreground="Black"
-                        Grid.Column="6"
-                        Width="70" Height="30"
-                        Name="btnPrevious" Content="Previous"
+                <Button Foreground="#7F7F7F"
+                        Grid.Column="6" Width="70" Height="30" Content="Previous"
                         Command="{Binding Path=PreviousCommand}">
 
                     <Button.Style>
@@ -186,17 +203,17 @@
                         <ControlTemplate TargetType="Button">
                             <Border CornerRadius="2"
                                     BorderThickness="1"
-                                    BorderBrush="#7F7F7F"
+                                    BorderBrush="#E0E0E0"
                                     Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center"
-                                              HorizontalAlignment="Center">
+                                                  HorizontalAlignment="Center">
                                 </ContentPresenter>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
 
-                <Button Foreground="Black"
+                <Button Foreground="#7F7F7F"
                         Grid.Column="8"
                         Width="70" Height="30"
                         Name="btnNext" Content="Next"
@@ -217,7 +234,7 @@
                         <ControlTemplate TargetType="Button">
                             <Border CornerRadius="2"
                                     BorderThickness="1"
-                                    BorderBrush="#7F7F7F"
+                                    BorderBrush="#E0E0E0"
                                     Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center"
                                               HorizontalAlignment="Center">
@@ -228,6 +245,8 @@
                 </Button>
 
             </Grid>
-        </Border>        
+        </Border>
+
+
     </Grid>
 </UserControl>

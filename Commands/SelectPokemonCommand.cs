@@ -5,14 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace pokedex.Commands
-{
-    public class RelayCommand : ICommand
-    {
+namespace pokedex.Commands {
+    public class SelectPokemonCommand : ICommand {
         public event EventHandler CanExecuteChanged;
-        private Action _execute;
+        private Action<Int32> _execute;
 
-        public RelayCommand(Action execute) {
+        public SelectPokemonCommand(Action<Int32> execute) {
             _execute = execute;
         }
 
@@ -21,7 +19,7 @@ namespace pokedex.Commands
         }
 
         public void Execute(object parameter) {
-            _execute.Invoke();  
+            _execute.Invoke((Int32)parameter);  
         }
     }
 }

@@ -9,12 +9,10 @@ namespace pokedex.Views {
     /// Lógica interna para MainView.xaml
     /// </summary>
     public partial class MainView : Window {
-        MainViewModel ViewModel;
 
         public MainView() {
             InitializeComponent();
-            ViewModel = new MainViewModel();
-            this.DataContext = ViewModel;
+            this.DataContext = MainViewModel.GetInstance();
         }
 
         private void Grid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
@@ -33,8 +31,6 @@ namespace pokedex.Views {
             } else {
                 this.WindowState = WindowState.Maximized;
             }
-
-            
         }
 
         private void btnMinimazed_Click(object sender, RoutedEventArgs e) {

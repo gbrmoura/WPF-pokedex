@@ -12,7 +12,7 @@ namespace pokedex.Models {
         public BaseContent[] forms { get; set; }
         [JsonProperty("game_indices")]
         public GameIndices[] game_indices { get; set; }
-        [JsonProperty("heigth")]
+        [JsonProperty("height")]
         public int heigth { get; set; }
         [JsonProperty("held_items")]
         public HeldItems[] held_items { get; set; }
@@ -38,7 +38,7 @@ namespace pokedex.Models {
         public Stats[] stats { get; set; }
         [JsonProperty("types")]
         public Types[] types { get; set; }
-        [JsonProperty("weigth")]
+        [JsonProperty("weight")]
         public int weigth { get; set; }
 
     }
@@ -122,7 +122,29 @@ namespace pokedex.Models {
         public String front_shiny { get; set; }
         [JsonProperty("front_shiny_female")]
         public String front_shiny_female { get; set; }
+        [JsonProperty("other")]
+        public Other other { get; set; }
     }
+
+    public class Other {
+        [JsonProperty("dream_world")]
+        public DreamWorld dream_world { get; set; }
+        [JsonProperty("official-artwork")]
+        public OfficialArtWork official_artwork { get; set; }
+    }
+
+    public class DreamWorld {
+        [JsonProperty("front_default")]
+        public String front_default { get; set; }
+        [JsonProperty("front_female")]
+        public String front_female { get; set; }
+    }
+
+    public class OfficialArtWork {
+        [JsonProperty("front_default")]
+        public String front_default { get; set; }
+    }
+
 
     public class Stats {
         [JsonProperty("base_stat")]

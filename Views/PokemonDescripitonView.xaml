@@ -1,0 +1,314 @@
+﻿<UserControl x:Class="pokedex.Views.PokemonDescripitonView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:pokedex.Views"
+             xmlns:converter="clr-namespace:pokedex.Converter"
+             mc:Ignorable="d" Height="670" Width="1100" 
+             Background="#FCFCFC">
+    <UserControl.Resources>
+        <converter:StringCapitalize x:Key="StringConverter"/>
+        <converter:PokemonColor x:Key="PokemonColor"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0"
+                    Background="{Binding Path=Pokemon.types[0].type.Name, Converter={StaticResource PokemonColor}}">
+            
+        </StackPanel>
+        <StackPanel Grid.Column="2" 
+                    Background="{Binding Path=Pokemon.types[0].type.Name, Converter={StaticResource PokemonColor}}">
+            
+        </StackPanel>
+        
+        <ScrollViewer Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="140"/>
+                    <RowDefinition Height="430"/>
+                    <RowDefinition Height="300"/>
+                    <RowDefinition Height="330"/>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Row="0" Width="186" Height="44"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Content="Back" FontSize="24"
+                        Foreground="White"
+                        Command="{Binding Path=RollBack}" Grid.ColumnSpan="2" Margin="0,38">
+
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="{Binding Path=Pokemon.types[0].type.Name, Converter={StaticResource PokemonColor}}"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{Binding Path=Pokemon.types[0].type.Name, Converter={StaticResource PokemonColor}}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="0, 2, 2, 0"
+                                    Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center">
+                                </ContentPresenter>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <TextBlock FontSize="78" Foreground="#4F4F4F"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" Grid.Column="1"
+                           Text="{Binding Path=Pokemon.name, Converter={StaticResource StringConverter}}" />
+
+
+                <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="360"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Width="300" Height="380" Grid.Column="0"
+                            BorderThickness="2" BorderBrush="{Binding Path=Pokemon.types[0].type.Name, Converter={StaticResource PokemonColor}}"
+                            CornerRadius="2">
+                        
+                    </Border>
+                    
+                    <Image Height="280" Width="280" Grid.Column="0"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Source="{Binding Path=Pokemon.sprites.other.official_artwork.front_default}"/>
+
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="Pokedex data" 
+                               Margin="15,5" Grid.ColumnSpan="2" 
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Bottom"
+                               FontSize="24" Foreground="#4F4F4F"/>
+                        <StackPanel Background="#E0E0E0" Height="1" VerticalAlignment="Bottom" Grid.Row="0"  Grid.ColumnSpan="2" Margin="10,0"/>
+                        <StackPanel Background="#E0E0E0" Height="1" VerticalAlignment="Bottom" Grid.Row="1"  Grid.ColumnSpan="2" Margin="10,0"/>
+                        <StackPanel Background="#E0E0E0" Height="1" VerticalAlignment="Bottom" Grid.Row="2"  Grid.ColumnSpan="2" Margin="10,0"/>
+                        <StackPanel Background="#E0E0E0" Height="1" VerticalAlignment="Bottom" Grid.Row="3"  Grid.ColumnSpan="2" Margin="10,0"/>
+                        <StackPanel Background="#E0E0E0" Height="1" VerticalAlignment="Bottom" Grid.Row="4"  Grid.ColumnSpan="2" Margin="10,0"/>
+                        <StackPanel Background="#E0E0E0" Height="1" VerticalAlignment="Bottom" Grid.Row="5"  Grid.ColumnSpan="2" Margin="10,0"/>
+                        <StackPanel Background="#E0E0E0" Height="1" VerticalAlignment="Bottom" Grid.Row="6"  Grid.ColumnSpan="2" Margin="10,0"/>
+
+                        <TextBlock Text="National N°" Grid.Column="0" Grid.Row="1"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               FontSize="14" Foreground="#7F7F7F"/>
+
+                        <TextBlock Text="Type" Grid.Column="0" Grid.Row="2"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               FontSize="14" Foreground="#7F7F7F"/>
+
+                        <TextBlock Text="Species" Grid.Column="0" Grid.Row="3"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               FontSize="14" Foreground="#7F7F7F"/>
+
+                        <TextBlock Text="Heigth" Grid.Column="0" Grid.Row="4"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               FontSize="14" Foreground="#7F7F7F"/>
+
+                        <TextBlock Text="Weigth" Grid.Column="0" Grid.Row="5"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               FontSize="14" Foreground="#7F7F7F"/>
+
+                        <TextBlock Text="Abilities" Grid.Column="0" Grid.Row="6"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               FontSize="14" Foreground="#7F7F7F"/>
+
+                        <TextBlock Text="{Binding Path=Pokemon.id}" Grid.Column="1" Grid.Row="1"
+                               VerticalAlignment="Center" HorizontalAlignment="Left"
+                               FontSize="14" TextAlignment="Left" Margin="10"/>
+
+                        <ItemsControl ItemsSource="{Binding Path=Pokemon.types}" Grid.Row="2" Grid.Column="1"
+                                      HorizontalAlignment="Left" Margin="10, 0"
+                                      VerticalAlignment="Center">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border CornerRadius="2" Margin="5,5"
+                                            BorderBrush="#E0E0E0" BorderThickness="1"
+                                            Background="{Binding Path=type.Name, Converter={StaticResource PokemonColor}}" 
+                                            Height="25" Width="80">
+                                        <TextBlock Text="{Binding Path=type.Name, Converter={StaticResource StringConverter}}" 
+                                                   FontSize="14" Foreground="White" 
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"></TextBlock>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal"
+                                               HorizontalAlignment="Center"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+
+                        <Grid Grid.Column="1" Grid.Row="6"
+                              Height="20" Width="180">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Overgrow" FontSize="14"
+                                       TextAlignment="Right" VerticalAlignment="Bottom"/>
+
+                            <TextBlock Text=" (hidden)" FontSize="10"  
+                                       Grid.Column="1" Foreground="#7F7F7F"
+                                       TextAlignment="Left" VerticalAlignment="Bottom"/>
+                        </Grid>
+                        
+                        <TextBlock Text="{Binding Path=Pokemon.heigth}" Grid.Column="1" Grid.Row="4"
+                               VerticalAlignment="Center" HorizontalAlignment="Left"
+                               FontSize="14" TextAlignment="Left" Margin="10"/>
+
+                        <TextBlock Text="{Binding Path=Pokemon.weigth}" Grid.Column="1" Grid.Row="5"
+                               VerticalAlignment="Center" HorizontalAlignment="Left"
+                               FontSize="14" TextAlignment="Left" Margin="10"/>
+
+                    </Grid>
+
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="Training" 
+                               Margin="15,5" Grid.ColumnSpan="2" 
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Bottom"
+                               FontSize="24" Foreground="#4F4F4F"/>
+
+                        <StackPanel Background="#E0E0E0" Height="1" VerticalAlignment="Bottom" Grid.Row="0"  Grid.ColumnSpan="2" Margin="10,0"/>
+                        <StackPanel Background="#E0E0E0" Height="1" VerticalAlignment="Bottom" Grid.Row="1"  Grid.ColumnSpan="2" Margin="10,0"/>
+                        <StackPanel Background="#E0E0E0" Height="1" VerticalAlignment="Bottom" Grid.Row="2"  Grid.ColumnSpan="2" Margin="10,0"/>
+                        <StackPanel Background="#E0E0E0" Height="1" VerticalAlignment="Bottom" Grid.Row="3"  Grid.ColumnSpan="2" Margin="10,0"/>
+                        <StackPanel Background="#E0E0E0" Height="1" VerticalAlignment="Bottom" Grid.Row="4"  Grid.ColumnSpan="2" Margin="10,0"/>
+                        <StackPanel Background="#E0E0E0" Height="1" VerticalAlignment="Bottom" Grid.Row="5"  Grid.ColumnSpan="2" Margin="10,0"/>
+                        <StackPanel Background="#E0E0E0" Height="1" VerticalAlignment="Bottom" Grid.Row="6"  Grid.ColumnSpan="2" Margin="10,0"/>
+                        <StackPanel Background="#E0E0E0" Height="1" VerticalAlignment="Bottom" Grid.Row="7"  Grid.ColumnSpan="2" Margin="10,0"/>
+                        <StackPanel Background="#E0E0E0" Height="1" VerticalAlignment="Bottom" Grid.Row="8"  Grid.ColumnSpan="2" Margin="10,0"/>
+                        <StackPanel Background="#E0E0E0" Height="1" VerticalAlignment="Bottom" Grid.Row="9"  Grid.ColumnSpan="2" Margin="10,0"/>
+
+
+                        <TextBlock Text="EV yield" Grid.Column="0" Grid.Row="1"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               FontSize="14" Foreground="#7F7F7F"/>
+
+                        <TextBlock Text="Catch rate" Grid.Column="0" Grid.Row="2"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               FontSize="14" Foreground="#7F7F7F"/>
+
+                        <TextBlock Text="FriendShip" Grid.Column="0" Grid.Row="3"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               FontSize="14" Foreground="#7F7F7F"/>
+
+                        <TextBlock Text="Base Exp." Grid.Column="0" Grid.Row="4"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               FontSize="14" Foreground="#7F7F7F"/>
+
+                        <TextBlock Text="Growth Rate" Grid.Column="0" Grid.Row="5"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               FontSize="14" Foreground="#7F7F7F"/>
+
+
+                        <TextBlock Text="" Grid.Column="1" Grid.Row="1"
+                               VerticalAlignment="Center" HorizontalAlignment="Left"
+                               FontSize="14" TextAlignment="Left" Margin="10"/>
+
+                        <TextBlock Text="{Binding Path=Pokemon.base_experience}" Grid.Column="1" Grid.Row="4"
+                               VerticalAlignment="Center" HorizontalAlignment="Left"
+                               FontSize="14" TextAlignment="Left" Margin="10"/>
+
+                        <TextBlock Text="" Grid.Column="1" Grid.Row="5"
+                               VerticalAlignment="Center" HorizontalAlignment="Left"
+                               FontSize="14" TextAlignment="Left" Margin="10"/>
+
+
+                        <TextBlock Text="Breeding" Grid.Row="6" 
+                               Margin="15,5" Grid.ColumnSpan="2" 
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Bottom"
+                               FontSize="24" Foreground="#4F4F4F"/>
+
+                        <TextBlock Text="Egg Groups" Grid.Column="0" Grid.Row="7"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               FontSize="14" Foreground="#7F7F7F"/>
+
+                        <TextBlock Text="Gender" Grid.Column="0" Grid.Row="8"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               FontSize="14" Foreground="#7F7F7F"/>
+
+                        <TextBlock Text="Egg Cycles" Grid.Column="0" Grid.Row="9"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               FontSize="14" Foreground="#7F7F7F"/>
+
+                    </Grid>
+
+                </Grid>
+
+                <Grid Grid.Row="2" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                </Grid>
+
+                <Grid Grid.Row="3" Grid.ColumnSpan="2">
+
+                </Grid>
+
+            </Grid>
+        </ScrollViewer>
+
+    </Grid>
+    
+</UserControl>
